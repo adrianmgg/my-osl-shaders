@@ -1,7 +1,7 @@
 [explanation of what p and q are](http://mathworld.wolfram.com/StarPolygon.html)
 
-![example](star/image3.png)
-![example](star/image2.png)
-![example](star/image1.png)
-![example](star/image4.png)
-![example](star/image5.png)
+![example](image3.png)
+![example](image2.png)
+![example](image1.png)
+![example](image4.png)
+![example](image5.png)
