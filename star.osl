@@ -1,0 +1,45 @@
+// used http://mathworld.wolfram.com/StarPolygon.html and http://blackpawn.com/texts/pointinpoly/ for reference
+
+int sameside(point p1,point p2,point a,point b){
+    point cp1 = cross(b-a, p1-a);
+    point cp2 = cross(b-a, p2-a);
+    return dot(cp1, cp2) >= 0;
+}
+
+point oncircle(point center,float radius,float divisions,float rotations){
+    return rotate(point(radius,0,0)+center,(M_2PI/divisions)*rotations,center,center+point(0,0,1));
+}
+
+shader name(
+vector Vector = P,
+point center=point(0,0,0),
+float size=1.0,
+int p=5,
+int q=2,
+int mode=0,
+output float fac=0.0)
+{
+    int i=q;
+    int j=q*2;
+    int k=q*3;
+    int intersections=0;
+    for(int n=0;n<p;n++){
+        i=(i+q)%p;
+        j=(j+q)%p;
+        k=(k+q)%p;
+        point pt1=oncircle(center,size,p,i);
+        point pt2=oncircle(center,size,p,j);
+        point pt3=oncircle(center,size,p,k);
+        intersections+=sameside(pt1,pt2,pt3,Vector);
+    }
+    if(mode==0){
+        fac=(intersections%p)>1;
+    }
+    else if(mode==1){
+        fac=(intersections%2);
+    }
+    else{
+        fac=(intersections%p);
+    }
+}
+
