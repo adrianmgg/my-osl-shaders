@@ -1,0 +1,17 @@
+//code based on
+//https://en.wikipedia.org/wiki/Mandelbrot_set#Computer_drawings
+
+shader noise(
+	int max_iterations = 1000,
+	point Point = P,
+	output int iterations = 0)
+{   
+	float x = 0.0;
+		float y = 0.0;
+		while (((x*x + y*y) < 2*2)  &&  (iterations < max_iterations)) {
+		float xtemp = x*x - y*y + Point[0];
+		y = 2*x*y + Point[1];
+		x = xtemp;
+		iterations++;
+	}
+}
